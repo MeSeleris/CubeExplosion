@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Explosion : MonoBehaviour
@@ -9,17 +10,40 @@ public class Explosion : MonoBehaviour
 
     private void OnEnable()
     {
-        _handler.SpawnCube += Explode;
+        _handler.Explosion += Explode;
     }
 
     private void OnDisable()
     {
-        _handler.SpawnCube -= Explode;
+        _handler.Explosion -= Explode;
     }
 
-    private void Explode(Cube cube)
+    private void OnMouseUpAsButton()
     {
-        cube.Rigidbody.AddExplosionForce(_explosionForce, cube.transform.position, _explosionRadius);
+        Explode();
         //Instantiate(_effect, transform.position, transform.rotation);
+        Destroy(gameObject);
+    }
+
+    private void Explode()
+    {
+        foreach (Rigidbody hit in GetExplodadbleObjects())
+            hit.AddExplosionForce(_explosionForce, transform.position, _explosionRadius);
+    }
+
+    private List<Rigidbody> GetExplodadbleObjects()
+    {
+        Collider[] hits = Physics.OverlapSphere(transform.position, _explosionRadius);
+
+        List<Rigidbody> cubes = new();
+
+        foreach (Collider hit in hits)
+        {
+            if(hit.attachedRigidbody != null)
+                cubes.Add(hit.attachedRigidbody);
+        }
+
+        return cubes;
+
     }
 }
