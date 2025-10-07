@@ -4,6 +4,13 @@ public class ColorChanger : MonoBehaviour
 {
     [SerializeField] private Handler _handler;
 
+    private Renderer _renderer;
+
+    private void Awake()
+    {
+        _renderer = GetComponent<Renderer>();
+    }
+
     private void Start()
     {
         SetColor();
@@ -12,7 +19,7 @@ public class ColorChanger : MonoBehaviour
     private void SetColor()
     {
         Color randomColor = new Color (Random.value, Random.value, Random.value);
-        
-        GetComponent<Renderer>().material.color = randomColor;
+
+        _renderer.material.color = randomColor;
     }
 }
