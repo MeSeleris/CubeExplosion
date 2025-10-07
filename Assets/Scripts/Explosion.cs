@@ -6,7 +6,6 @@ public class Explosion : MonoBehaviour
     [SerializeField] private Handler _handler;
     [SerializeField] private float _explosionRadius;
     [SerializeField] private float _explosionForce;
-    //[SerializeField] private ParticleSystem _effect;
 
     private void OnEnable()
     {
@@ -21,7 +20,6 @@ public class Explosion : MonoBehaviour
     private void OnMouseUpAsButton()
     {
         Explode();
-        //Instantiate(_effect, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 
