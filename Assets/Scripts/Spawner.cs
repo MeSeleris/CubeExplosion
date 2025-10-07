@@ -7,7 +7,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private Transform _transform;
 
     private int _spawnMin = 2;
-    private int _spawnMax = 6;
+    private int _spawnMax = 6;   
 
     private void Start()
     {
@@ -46,7 +46,9 @@ public class Spawner : MonoBehaviour
 
     private Vector3 DivideScale(Cube cube)
     {
-        Vector3 scale = cube.transform.localScale / 2f;
+        float _scaleDivide = 2f;
+
+        Vector3 scale = cube.transform.localScale / _scaleDivide;
 
         return scale;
     }
